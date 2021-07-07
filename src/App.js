@@ -1,35 +1,25 @@
+import { useState } from "react";
 import "./App.css";
 import Expenses from "./components/Expenses/Expenses";
+import NewExpense from "./components/NewExpense/NewExpense";
 
 const App = () => {
-  const expenses = [
-    {
-      id: 1,
-      title: "Toilet Paper",
-      amount: 94.12,
-      date: new Date(2021, 7, 14),
-    },
-    {
-      id: 2,
-      title: "Books",
-      amount: 94.12,
-      date: new Date(2021, 7, 14),
-    },
-    {
-      id: 3,
-      title: "Binders",
-      amount: 94.12,
-      date: new Date(2021, 7, 14),
-    },
-    {
-      id: 4,
-      title: "Toilet Paper",
-      amount: 94.12,
-      date: new Date(2021, 7, 14),
-    },
-  ];
+  const DUMMY_EXPANSES = [];
+  const [expenses, setExpense] = useState(DUMMY_EXPANSES);
+  const addExpenseHandler = (expanse) => {
+    setExpense((prevExpanses) => {
+      return [expanse, ...prevExpanses];
+    });
+  };
+  //originally the data is being sent through ReactDOM like this
+  // return React.createElement(
+  //   "div",
+  //   {},
+  //   React.createElement('h2',{},"Lets Get Started",
+  //   React.createElement(Expenses,{items:expenses})))
   return (
     <div>
+      <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses expenses={expenses}></Expenses>
     </div>
   );
